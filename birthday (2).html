@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Gift For You 🎁</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fredoka+One&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Fredoka One', sans-serif;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .screen {
+    display: none;
+    width: 480px;
+    min-height: 320px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.4s ease;
+  }
+  .screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* ===== SCREEN 1: Accept Gift ===== */
+  #s1 {
+    background: #fdf6f0;
+    padding: 30px 30px 35px;
+    text-align: center;
+  }
+  #s1 h1 {
+    font-size: 26px;
+    color: #2b2b2b;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .cat-img { width: 130px; margin: 5px auto 20px; display: block; }
+  .btn-row { display: flex; gap: 18px; justify-content: center; }
+  .pill-btn {
+    background: #f4b8c8;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 32px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 18px;
+    color: #5a2a3a;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #d88fa0;
+    transition: transform 0.1s, box-shadow 0.1s;
+    letter-spacing: 1px;
+  }
+  .pill-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #d88fa0; }
+  .pill-btn:hover { background: #f9cdd8; }
+
+  /* ===== SCREEN 2: HOW DARE YOU ===== */
+  #s2 {
+    background: #fdf6f0;
+    padding: 30px 30px 35px;
+    text-align: center;
+  }
+  #s2 h1 { font-size: 28px; color: #2b2b2b; margin-bottom: 10px; }
+
+  /* ===== SCREEN 3: Package ===== */
+  #s3 {
+    background: #fce4ec;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 24px, rgba(255,255,255,0.5) 24px, rgba(255,255,255,0.5) 25px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 24px, rgba(255,255,255,0.5) 24px, rgba(255,255,255,0.5) 25px
+    );
+    padding: 25px;
+    min-height: 340px;
+    position: relative;
+  }
+  #s3 h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: #5a2233;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .package-items {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+  .pkg-item {
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+    background: #fff;
+  }
+  .pkg-item:hover { transform: scale(1.05) rotate(-1deg); }
+  .pkg-item img { width: 130px; height: 130px; object-fit: cover; display: block; }
+  .pkg-label {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    padding: 4px;
+    text-decoration: underline;
+  }
+  .s3-bottom { text-align: center; margin-top: 14px; font-family: 'Caveat', cursive; font-size: 18px; color: #a04060; }
+  /* sticker decorations */
+  .sticker { position: absolute; font-size: 28px; pointer-events: none; }
+
+  /* ===== SCREEN 4: Gift for You ===== */
+  #s4 {
+    background: #fff8f8;
+    padding: 25px 30px 30px;
+    text-align: center;
+  }
+  #s4 h1 { font-size: 26px; color: #2b2b2b; margin-bottom: 16px; }
+  .gift-cats { display: flex; gap: 20px; justify-content: center; margin-bottom: 14px; }
+  .gift-box {
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-align: center;
+  }
+  .gift-box:hover { transform: scale(1.06) rotate(1deg); }
+  .gift-box img { width: 115px; border-radius: 8px; }
+  #s4 p { font-family: 'Fredoka One'; font-size: 14px; color: #888; letter-spacing: 1px; }
+
+  /* ===== SCREEN 5: Birthday Card ===== */
+  #s5 {
+    background: #fce4ec;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 22px, rgba(255,255,255,0.45) 22px, rgba(255,255,255,0.45) 23px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 22px, rgba(255,255,255,0.45) 22px, rgba(255,255,255,0.45) 23px
+    );
+    padding: 24px 28px 28px;
+    min-height: 340px;
+    position: relative;
+  }
+  .back-btn {
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    font-family: 'Caveat', cursive; font-size: 17px; color: #6b3a52;
+    text-decoration: underline; cursor: pointer; background: none; border: none;
+  }
+  .polaroid {
+    background: #fff;
+    padding: 8px 8px 28px;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.2);
+    transform: rotate(-2deg);
+    width: 150px;
+    margin: 28px auto 8px;
+  }
+  .polaroid img { width: 100%; height: 120px; object-fit: cover; }
+  .best-wishes {
+    position: absolute; right: 28px; top: 90px;
+    font-family: 'Caveat', cursive; font-size: 28px; color: #8b4565; line-height: 1.1;
+    text-align: right;
+  }
+  .card-quote {
+    font-family: 'Caveat', cursive;
+    font-size: 15px; color: #5a2233; text-align: center; margin-top: 8px;
+    line-height: 1.5; max-width: 280px;
+  }
+
+  /* ===== SCREEN 6: Letter ===== */
+  #s6 {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23e8d5a3'/%3E%3C/svg%3E") center/cover;
+    background-color: #e8d5a3;
+    padding: 30px 28px 28px;
+    min-height: 320px;
+    position: relative;
+    border-radius: 4px;
+  }
+  .parchment {
+    background: linear-gradient(135deg, #f5e6b0 0%, #e8d08a 40%, #f0dfa0 70%, #e5cc7e 100%);
+    border-radius: 8px;
+    padding: 24px 22px;
+    box-shadow: inset 0 0 30px rgba(150,100,0,0.15), 2px 4px 10px rgba(0,0,0,0.2);
+    border: 1px solid #c9a84c;
+    min-height: 210px;
+    position: relative;
+  }
+  .parchment::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='2' cy='2' r='0.8' fill='rgba(150,100,0,0.08)'/%3E%3C/svg%3E");
+    border-radius: 8px; pointer-events: none;
+  }
+  .letter-text {
+    font-family: 'Caveat', cursive; font-size: 17px; color: #3a2a0a; line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+  .letter-back {
+    font-family: 'Caveat', cursive; font-size: 16px; color: #7a5a2a;
+    text-decoration: underline; cursor: pointer; background: none; border: none;
+    margin-top: 14px; display: block; text-align: center; width: 100%;
+  }
+
+  /* ===== SCREEN 7: Final ===== */
+  #s7 {
+    background: #fff;
+    padding: 28px 32px 36px;
+    text-align: center;
+    min-height: 280px;
+    position: relative;
+  }
+  .heart-big { font-size: 28px; margin-bottom: 6px; }
+  .annoy-title {
+    font-family: 'Fredoka One';
+    font-size: 30px;
+    color: #8b0a2a;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .annoy-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 24px; color: #8b0a2a; font-style: italic; margin-bottom: 16px;
+  }
+  .bear-row {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding: 0 10px;
+    margin-top: 8px;
+  }
+  .bear { font-size: 56px; }
+  .tiny-hearts { font-size: 18px; color: #e57; }
+
+  /* emoji fallback illustrations */
+  .cat-emoji { font-size: 90px; line-height: 1; margin: 10px 0; }
+  .gun-cat-emoji { font-size: 90px; line-height: 1; margin: 10px 0; }
+
+  /* ===== SCREEN 8: Cake ===== */
+  #s8 {
+    background: linear-gradient(160deg, #fff0f5 0%, #fde8f0 60%, #fce4ec 100%);
+    padding: 22px 28px 28px;
+    min-height: 360px;
+    text-align: center;
+    position: relative;
+  }
+  #s8 h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 26px; color: #8b2252; margin-bottom: 4px;
+  }
+  #s8 .sub { font-family: 'Caveat', cursive; font-size: 16px; color: #c4709a; margin-bottom: 10px; }
+  .cake-svg-wrap { margin: 0 auto 12px; display: block; }
+  @keyframes flicker {
+    0%,100% { opacity:1; transform: scaleY(1) translateY(0); }
+    40% { opacity:0.85; transform: scaleY(0.92) translateY(1px); }
+    70% { opacity:0.95; transform: scaleY(1.06) translateY(-1px); }
+  }
+  .flame { animation: flicker 1.2s ease-in-out infinite; transform-origin: bottom center; }
+  .flame:nth-child(2) { animation-delay: 0.3s; }
+  .flame:nth-child(3) { animation-delay: 0.6s; }
+  @keyframes sparkle {
+    0%,100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  .sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+  .sparkle:nth-child(2) { animation-delay: 0.5s; }
+  .sparkle:nth-child(3) { animation-delay: 1s; }
+  .cake-btn-row { display: flex; gap: 14px; justify-content: center; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: Accept the gift -->
+<div id="s1" class="screen active">
+  <h1> ACCEPT THE GIFT</h1>
+  <div class="cat-emoji">🐱🎀</div>
+  <p style="font-family:'Caveat',cursive;font-size:15px;color:#999;margin-bottom:16px;">*presents you flowers*</p>
+  <div class="btn-row">
+    <button class="pill-btn" onclick="goTo('s3')">YES</button>
+    <button class="pill-btn" id="no-btn" onclick="goTo('s2')">NO</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: HOW DARE YOU -->
+<div id="s2" class="screen">
+  <h1>HOW DARE YOU!</h1>
+  <div class="gun-cat-emoji">😾🔫</div>
+  <br>
+  <button class="pill-btn" onclick="goTo('s1')">TRY AGAIN</button>
+</div>
+
+<!-- SCREEN 3: You've a Package -->
+<div id="s3" class="screen">
+  <span class="sticker" style="top:8px;left:8px;">✨</span>
+  <span class="sticker" style="top:8px;right:8px;">🌸</span>
+  <span class="sticker" style="bottom:10px;left:10px;">🐇</span>
+  <span class="sticker" style="bottom:10px;right:10px;">🧁</span>
+  <h2>You've a package! 📦</h2>
+  <div class="package-items">
+    <div class="pkg-item" onclick="goTo('s6')" title="Open the letter">
+      <div style="width:130px;height:130px;background:linear-gradient(135deg,#c8a96e,#a0793a);display:flex;align-items:center;justify-content:center;font-size:60px;">🎁</div>
+      <div class="pkg-label">gift box</div>
+    </div>
+    <div class="pkg-item" onclick="goTo('s8')" title="Open the cake & card">
+      <div style="width:130px;height:130px;background:linear-gradient(135deg,#f9e4ea,#f5c6d0);display:flex;align-items:center;justify-content:center;font-size:60px;">🎂</div>
+      <div class="pkg-label">card & cake</div>
+    </div>
+  </div>
+  <p class="s3-bottom">Click items to open</p>
+<button class="back-btn" onclick="goTo('s1')">Back</button>
+</div>
+
+<!-- SCREEN 4: Gift for You (cats in boxes) -->
+<div id="s4" class="screen">
+  <h1>GIFT FOR YOU!</h1>
+  <div class="gift-cats">
+    <div class="gift-box" onclick="goTo('s5')">
+      
+      </div>
+    </div>
+    <div class="gift-box" onclick="goTo('s5')">
+      <div style="width:115px;height:130px;background:linear-gradient(180deg,#e8f0f9,#c0d8f0);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:56px;box-shadow:2px 4px 10px rgba(0,0,0,0.15);">
+        🐱<div style="font-size:32px;margin-top:-4px;">🎀</div>
+      </div>
+    </div>
+  </div>
+  <p>CLICK ANY GIFT TO OPEN</p>
+</div>
+
+<!-- SCREEN 5: Birthday Card with photo -->
+<div id="s5" class="screen">
+  <button class="back-btn" onclick="goTo('s3')">Back</button>
+  <span class="sticker" style="top:10px;right:16px;font-size:20px;">🎈🎈</span>
+  <span class="sticker" style="bottom:12px;left:14px;font-size:28px;">🐧</span>
+  <div class="best-wishes">best<br>wishes</div>
+  <div class="polaroid">
+    <div style="width:100%;height:120px;background:linear-gradient(135deg,#6b3a52,#9a6070);display:flex;align-items:center;justify-content:center;font-size:40px;">🐻</div>
+  </div>
+  <p class="card-quote">Pretty isn't just how you look — it's how you treat people. And you do that beautifully. 💝</p>
+  <br>
+  <button class="pill-btn" style="font-size:14px;padding:8px 22px;" onclick="goTo('s7')">Continue →</button>
+</div>
+
+<!-- SCREEN 6: Parchment Letter -->
+<div id="s6" class="screen">
+  <div class="parchment">
+    <div class="letter-text">
+      Happy Birthday Pragyaa 🎂<br><br>
+      I don’t usually say things like this, but you’re genuinely someone I’m really glad I got to know. You have this calm, nice energy that just makes things feel better without even trying. I hope this year brings you everything you’ve been working for.<br><br>
+      You mean more than you know. Wishing you the happiest birthday. 🌸
+    </div>
+  </div>
+  <button class="letter-back" onclick="goTo('s3')">Back</button>
+</div>
+
+<!-- SCREEN 7: Final — I want to annoy you -->
+<div id="s7" class="screen">
+  <div class="heart-big">🩷</div>
+  <div class="annoy-title">I WANT TO ANNOY YOU</div>
+  <div class="annoy-sub">for the rest of my life</div>
+  <div class="tiny-hearts">🩷 🩷</div>
+  <div class="bear-row">
+    <div class="bear">🐻</div>
+    <div class="bear">🐻</div>
+<button class="back-btn" onclick="goTo('s3')">Back</button>
+  </div>
+</div>
+
+<!-- SCREEN 8: Cake -->
+<div id="s8" class="screen">
+  <span class="sticker" style="top:8px;left:10px;font-size:22px;">🌸</span>
+  <span class="sticker" style="top:8px;right:10px;font-size:22px;">✨</span>
+  <h2>🎂 Happy Birthday! 🎂</h2>
+  <p class="sub">A little cake, made with lots of love 🌹</p>
+
+  <!-- SVG Cake with strawberries, rose, candles -->
+  <svg class="cake-svg-wrap" width="240" height="210" viewBox="0 0 240 210" xmlns="http://www.w3.org/2000/svg">
+    <!-- Plate -->
+    <ellipse cx="120" cy="195" rx="105" ry="10" fill="#f5c8dc" opacity="0.5"/>
+
+    <!-- Bottom tier -->
+    <rect x="20" y="145" width="200" height="50" rx="6" fill="#f9d0e0"/>
+    <ellipse cx="120" cy="145" rx="100" ry="10" fill="#fce4ef"/>
+    <ellipse cx="120" cy="195" rx="100" ry="10" fill="#f0b8cc"/>
+    <!-- bottom frosting drips -->
+    <path d="M30,148 Q40,138 50,148 Q60,138 70,148 Q80,138 90,148 Q100,138 110,148 Q120,138 130,148 Q140,138 150,148 Q160,138 170,148 Q180,138 190,148 Q200,138 210,148" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+    <!-- bottom tier decorations dots -->
+    <circle cx="50" cy="168" r="5" fill="#e8719a"/>
+    <circle cx="80" cy="174" r="4" fill="#f4a0c0"/>
+    <circle cx="110" cy="170" r="5" fill="#e8719a"/>
+    <circle cx="140" cy="174" r="4" fill="#f4a0c0"/>
+    <circle cx="170" cy="168" r="5" fill="#e8719a"/>
+    <circle cx="200" cy="172" r="4" fill="#f4a0c0"/>
+
+    <!-- Top tier -->
+    <rect x="45" y="88" width="150" height="60" rx="6" fill="#fce8f0"/>
+    <ellipse cx="120" cy="88" rx="75" ry="8" fill="#fff0f6"/>
+    <ellipse cx="120" cy="148" rx="75" ry="8" fill="#f5c8dc"/>
+    <!-- top frosting drips -->
+    <path d="M50,91 Q60,80 70,91 Q80,80 90,91 Q100,80 110,91 Q120,80 130,91 Q140,80 150,91 Q160,80 170,91 Q180,80 190,91" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Rose on top (center) -->
+    <circle cx="120" cy="82" r="14" fill="#e8406a"/>
+    <circle cx="120" cy="82" r="9" fill="#f06080"/>
+    <circle cx="120" cy="82" r="5" fill="#c83050"/>
+    <ellipse cx="110" cy="78" rx="7" ry="5" fill="#e8506a" opacity="0.7" transform="rotate(-20,110,78)"/>
+    <ellipse cx="130" cy="78" rx="7" ry="5" fill="#e8506a" opacity="0.7" transform="rotate(20,130,78)"/>
+    <ellipse cx="120" cy="74" rx="6" ry="4" fill="#f08090" opacity="0.8"/>
+    <!-- rose leaves -->
+    <ellipse cx="104" cy="88" rx="9" ry="5" fill="#5a9e50" transform="rotate(-30,104,88)"/>
+    <ellipse cx="136" cy="88" rx="9" ry="5" fill="#5a9e50" transform="rotate(30,136,88)"/>
+
+    <!-- Strawberries on top tier -->
+    <!-- strawberry left -->
+    <path d="M65,108 Q60,100 68,96 Q76,92 80,100 Q84,108 78,114 Q72,118 65,108Z" fill="#e83030"/>
+    <path d="M68,96 Q70,90 74,92" fill="none" stroke="#3a8030" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="69" cy="104" r="1.2" fill="#fff" opacity="0.7"/>
+    <circle cx="74" cy="108" r="1.2" fill="#fff" opacity="0.7"/>
+    <circle cx="71" cy="111" r="1" fill="#fff" opacity="0.7"/>
+    <!-- strawberry right -->
+    <path d="M160,108 Q155,100 163,96 Q171,92 175,100 Q179,108 173,114 Q167,118 160,108Z" fill="#e83030"/>
+    <path d="M163,96 Q165,90 169,92" fill="none" stroke="#3a8030" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="164" cy="104" r="1.2" fill="#fff" opacity="0.7"/>
+    <circle cx="169" cy="108" r="1.2" fill="#fff" opacity="0.7"/>
+    <circle cx="166" cy="111" r="1" fill="#fff" opacity="0.7"/>
+
+    <!-- Whipped cream swirls -->
+    <path d="M88,86 Q92,78 96,82 Q100,86 96,90" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    <path d="M144,86 Q148,78 152,82 Q156,86 152,90" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Candles -->
+    <!-- candle 1 -->
+    <rect x="80" y="58" width="10" height="32" rx="3" fill="#f9d84a"/>
+    <rect x="80" y="58" width="10" height="8" rx="2" fill="#e8c030"/>
+    <!-- wick -->
+    <line x1="85" y1="58" x2="85" y2="52" stroke="#555" stroke-width="1.5"/>
+    <g class="flame">
+      <ellipse cx="85" cy="48" rx="5" ry="8" fill="#ff9020" opacity="0.9"/>
+      <ellipse cx="85" cy="50" rx="3" ry="5" fill="#ffdd00"/>
+      <ellipse cx="85" cy="52" rx="1.5" ry="2.5" fill="#fff" opacity="0.8"/>
+    </g>
+    <!-- candle 2 -->
+    <rect x="115" y="52" width="10" height="38" rx="3" fill="#f97070"/>
+    <rect x="115" y="52" width="10" height="8" rx="2" fill="#e04040"/>
+    <line x1="120" y1="52" x2="120" y2="46" stroke="#555" stroke-width="1.5"/>
+    <g class="flame">
+      <ellipse cx="120" cy="42" rx="5" ry="8" fill="#ff9020" opacity="0.9"/>
+      <ellipse cx="120" cy="44" rx="3" ry="5" fill="#ffdd00"/>
+      <ellipse cx="120" cy="46" rx="1.5" ry="2.5" fill="#fff" opacity="0.8"/>
+    </g>
+    <!-- candle 3 -->
+    <rect x="150" y="58" width="10" height="32" rx="3" fill="#b0e070"/>
+    <rect x="150" y="58" width="10" height="8" rx="2" fill="#80c040"/>
+    <line x1="155" y1="58" x2="155" y2="52" stroke="#555" stroke-width="1.5"/>
+    <g class="flame">
+      <ellipse cx="155" cy="48" rx="5" ry="8" fill="#ff9020" opacity="0.9"/>
+      <ellipse cx="155" cy="50" rx="3" ry="5" fill="#ffdd00"/>
+      <ellipse cx="155" cy="52" rx="1.5" ry="2.5" fill="#fff" opacity="0.8"/>
+    </g>
+
+    <!-- Sparkles around cake -->
+    <g class="sparkle"><text x="18" y="110" font-size="14">✨</text></g>
+    <g class="sparkle"><text x="205" y="105" font-size="14">✨</text></g>
+    <g class="sparkle"><text x="108" y="20" font-size="12">⭐</text></g>
+  </svg>
+
+  <div class="cake-btn-row">
+    <button class="pill-btn" style="font-size:14px;padding:8px 20px;" onclick="goTo('s4')">See Gift 🎁</button>
+    <button class="pill-btn" style="font-size:14px;padding:8px 20px;background:#fdd8e8;" onclick="goTo('s3')">← Back</button>
+  </div>
+</div>
+
+<script>
+  function goTo(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+</body>
+</html>
